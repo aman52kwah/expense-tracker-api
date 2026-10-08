@@ -1,0 +1,24 @@
+package com.example.expensetracker.dto;
+
+import jakarta.validation.constraints.NotBlank;
+
+
+public class VerifyRequest {
+    @NotBlank(message = "Token is required")
+    private String token;
+
+
+    public VerifyRequest(){}
+
+    public VerifyRequest(String token){
+        this.token = token;
+    }
+    public String getToken(){
+        return token;
+    }
+
+    public void setToken(String token){
+        this.token = token;
+    }
+
+}

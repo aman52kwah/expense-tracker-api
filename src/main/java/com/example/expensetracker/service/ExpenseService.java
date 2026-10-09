@@ -7,11 +7,13 @@ import com.example.expensetracker.model.User;
 import com.example.expensetracker.repository.CategoryRepository;
 import com.example.expensetracker.repository.ExpenseRepository;
 import com.example.expensetracker.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ExpenseService {
     private final ExpenseRepository expenseRepository;
     private final CategoryRepository categoryRepository;
@@ -39,7 +41,7 @@ public class ExpenseService {
          User user = userRepository.findByEmail(email)
                  .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Category category = categoryRepository.findById(request.getCatergoryId())
+        Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(()-> new RuntimeException("Category not found"));
 
         // verify category belongs to this user
@@ -66,7 +68,7 @@ public class ExpenseService {
             throw new RuntimeException("Not authorized to update this expense");
         }
 
-        Category category = categoryRepository.findById(request.getCatergoryId())
+        Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(()-> new RuntimeException("Category not found"));
 
         if (!category.getUser().getId().equals(expense.getUser().getId())){

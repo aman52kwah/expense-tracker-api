@@ -4,6 +4,7 @@ import com.example.expensetracker.dto.LoginRequest;
 import com.example.expensetracker.dto.RegisterRequest;
 import com.example.expensetracker.model.User;
 import com.example.expensetracker.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

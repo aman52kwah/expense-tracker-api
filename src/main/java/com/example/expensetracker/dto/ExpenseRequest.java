@@ -13,7 +13,7 @@ public class ExpenseRequest {
     @NotNull
     private LocalDate expenseDate;
     @NotNull
-    private Long catergoryId; // cleint references category by id
+    private Long categoryId; // cleint references category by id
 
 
     // no-arg constructor
@@ -23,7 +23,7 @@ public class ExpenseRequest {
         this.amount = amount;
         this.description = description;
         this.expenseDate = expenseDate;
-        this.catergoryId = catergoryId;
+        this.categoryId = catergoryId;
     }
 
 
@@ -51,11 +51,11 @@ public class ExpenseRequest {
         this.expenseDate = expenseDate;
     }
 
-    public @NotNull Long getCatergoryId() {
-     return catergoryId;
+    public @NotNull Long getCategoryId() {
+     return categoryId;
     }
 
-    public void setCatergoryId(@NotNull Long catergoryId) {
-        this.catergoryId = catergoryId;
+    public void setCategoryId(@NotNull Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

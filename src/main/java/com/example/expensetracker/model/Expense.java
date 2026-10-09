@@ -1,5 +1,6 @@
 package com.example.expensetracker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -16,10 +17,12 @@ public class Expense {
     private LocalDate expenseDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name ="category_id")
+    @JsonIgnore
     private Category category;
 
 

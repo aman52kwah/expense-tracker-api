@@ -2,6 +2,7 @@ package com.example.expensetracker.model;
 
 import jakarta.persistence.*;
 
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,23 +16,41 @@ public class User {
     String email;
     @Column(nullable = false)
     String password;
-    boolean enabled ;
     String verificationToken;
     LocalDateTime tokenExpiry;
+    @Column(nullable = false)
+    LocalDateTime createdAt = LocalDateTime.now();
+    LocalDateTime lastLoginAt = LocalDateTime.now();
+@Enumerated(EnumType.STRING)
+@Column(nullable = false)
+    private   Role role;
+@Enumerated(EnumType.STRING)
+@Column(nullable = false)
+    private  UserStatus userStatus;
 
 
-    public User(){}
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+
+
+    public User(){
+
+    }
 
 
     // constructor for users
-    public User(Long id,String email, String password ,boolean enabled,
-                String verificationToken, LocalDateTime tokenExpiry){
+    public User(Long id, String email, String password,
+                String verificationToken, LocalDateTime tokenExpiry, Role role, UserStatus userStatus){
         this.id = id;
         this.email = email;
         this.password =password;
-        this.enabled = false;
         this.verificationToken = verificationToken;
         this.tokenExpiry = tokenExpiry;
+        this.role = role;
+        this.userStatus = userStatus;
     }
 
     // getters and setters for Users
@@ -39,12 +58,10 @@ public class User {
 
     public String getEmail(){ return  email; }
 
-    public boolean isEnabled(){
-        return enabled;
+    public LocalDateTime getLastLoginAt() {
+        return lastLoginAt;
     }
-     public boolean getEnabled(){
-        return enabled;
-     }
+
     public String getPassword(){
         return password;
     }
@@ -56,6 +73,19 @@ public class User {
     public LocalDateTime getTokenExpiry() {
         return tokenExpiry;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
 
     //setters for user field
 
@@ -71,8 +101,12 @@ public class User {
         this.email = email;
     }
 
-    public void setEnabled(boolean enabled){
-        this.enabled = enabled;
+    public void setRole(Role role){
+        this.role =role;
+    }
+
+    public void setUserStatus(UserStatus userStatus){
+        this.userStatus =userStatus;
     }
 
     public void setVerificationToken(String verificationToken) {
@@ -81,5 +115,15 @@ public class User {
 
     public void setTokenExpiry(LocalDateTime tokenExpiry) {
         this.tokenExpiry = tokenExpiry;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+
+
+    public void setLastLoginAt(LocalDateTime lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
     }
 }

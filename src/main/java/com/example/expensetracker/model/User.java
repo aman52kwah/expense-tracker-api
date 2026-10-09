@@ -16,7 +16,6 @@ public class User {
     String email;
     @Column(nullable = false)
     String password;
-    boolean enabled ;
     String verificationToken;
     LocalDateTime tokenExpiry;
     @Column(nullable = false)

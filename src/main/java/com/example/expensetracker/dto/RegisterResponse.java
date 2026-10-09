@@ -16,7 +16,7 @@ public class RegisterResponse {
     }
 
     public String getEmail(){
-        return message;
+        return email;
     }
 
     public void setMessage(String message) {
